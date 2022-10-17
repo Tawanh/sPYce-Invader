@@ -1,0 +1,6 @@
+powers up types:
+    vie en +
+    type de tir : shotgun, big bullet
+    faster_bullet : 
+    damage+
+    
