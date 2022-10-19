@@ -26,9 +26,6 @@ class Ennemi:
         self._pv = PV
         self._position = Position
 
-        #affichage
-        ecran.blit(self._sprite,self._position)
-
     def movement(self,vitesse,direction,ecran):
         self._position[0] += vitesse * direction[0]
         self._position[1] += vitesse * direction[1]
