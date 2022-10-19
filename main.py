@@ -14,6 +14,7 @@ longueur = 1080
 largeur = 720
 screen = pygame.display.set_mode((longueur, largeur))
 
+projectiles = []
 joueur = Joueur(screen)
 
 running = True
@@ -29,15 +30,20 @@ while running:
 
 	keys = pygame.key.get_pressed()	
 			
-	if keys[pygame.K_RIGHT] and joueur.rect.x <= longueur - 64:
-			joueur.move_right()
+	if keys[pygame.K_RIGHT] and joueur.rect.x <= longueur - 64: 
+		joueur.move_right()
 	if keys[pygame.K_LEFT] and joueur.rect.x >= 0:
-			joueur.move_left()
+		joueur.move_left()
 
 
 	#fixer le nombre de fps sur ma clock
 	clock.tick(FPS)
-
+	if projectiles != []:
+		for e in projectiles:
+			if e.is_collide():
+				del e
+			else:
+				e.afficher()
 	joueur.afficher()
 	pygame.display.update()
 
