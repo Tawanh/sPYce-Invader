@@ -2,11 +2,11 @@
 
 #from joueur import Joueur
 import pygame
-pygame.init()
 from pygame.locals import *
 from joueur import Joueur
 from projectile import Projectile
 
+pygame.init()
 clock = pygame.time.Clock()
 FPS = 60
 
@@ -23,9 +23,9 @@ while running:
 	for event in pygame.event.get():
 		if event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_ESCAPE:
-				pygame.quit()
+				running = False
 			if event.type == pygame.QUIT:
-				pygame.quit()
+				running = False
 
 	keys = pygame.key.get_pressed()	
 			
@@ -41,3 +41,4 @@ while running:
 	joueur.afficher()
 	pygame.display.update()
 
+exit()
