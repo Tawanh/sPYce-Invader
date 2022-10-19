@@ -4,7 +4,7 @@
 import pygame
 pygame.init()
 from pygame.locals import *
-
+from joueur import Joueur
 from projectile import Projectile
 
 joueur = Joueur()
@@ -25,16 +25,14 @@ while running:
 			if event.key == pygame.K_ESCAPE:
 				pygame.quit()
 			if event.type == pygame.QUIT:
-					pygame.quit()
-			if event.key == pygame.K_SPACE:
-				balle = Projectile(-1, 1, (rect.x ,rect.y -64), 1 , screen)
-				balle.draw()
-		keys = pygame.key.get_pressed()
+				pygame.quit()
+
+	keys = pygame.key.get_pressed()	
 			
 	if keys[pygame.K_RIGHT] and joueur.rect.x <= longueur - 64:
-      		joueur.move_right()
-    	elif keys[pygame.K_LEFT] and joueur.rect.x >= 0:
-        	joueur.move_left()
+			joueur.move_right()
+	if keys[pygame.K_LEFT] and joueur.rect.x >= 0:
+			joueur.move_left()
 
 
 	#fixer le nombre de fps sur ma clock
