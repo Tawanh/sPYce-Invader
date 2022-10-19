@@ -1,8 +1,20 @@
 import pygame
 
 class Projectile:
-    
-    def __init__(self,degat, coords:tuple = (0,0),sens:int = 0, ecran = 0) -> None:
+    """
+    Création d'un instance Projectile:
+        balle = Projectile(degat: = 1, coords:tuple = (0,0),sens:int = 0, ecran = 0)
+
+    attributs d'instance :
+        _damage; _sens; screen; projectile; rect
+
+    attributs de classe:
+        Méthode :
+            afficher() : permet l'affichage de la balle et la deplace a chaque fois que la fonction est appellée -> None
+            is_collide() : detecte si la balle touche un ennemi ou un bord de l'ecran, et retourne True ou false -> Bool
+            mutateurs et acceseur permetant le changement et l'affichage de : damage, rect.x , rect.y 
+    """
+    def __init__(self,degat:int = 1, coords:tuple = (0,0),sens:int = 0, ecran = 0) -> None:
         self._damage = degat
         self._sens = sens
         self.screen = ecran
@@ -15,7 +27,7 @@ class Projectile:
         self.rect.y = coords[1]
     
     def afficher(self):
-            self.rect.y += self._sens * 5
+            self.add_coords(y = self._sens*5)
             self.screen.blit(self.projectile, (self.rect.x, self.rect.y))
             
     def is_collide(self):
@@ -25,6 +37,9 @@ class Projectile:
     
     def get_coords(self):
         return (self.rect.x, self.rect.y)
+    def add_coords(self, x:int = 0, y:int = 0):
+        self.rect.x += x
+        self.rect.y += y
     def set_coords(self, x:int = None ,y:int = None):
         if x == None:
             x = self.rect.x
@@ -32,10 +47,6 @@ class Projectile:
             y = self.rect.y
         self.rect.x = x
         self.rect.y = y
-    
-    def add_coords(self, x:int = 0, y:int = 0):
-        self.rect.x += x
-        self.rect.y += y
         
     def get_damage(self):
         return self._damage
