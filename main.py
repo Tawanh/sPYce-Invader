@@ -3,10 +3,11 @@
 #from joueur import Joueur
 import pygame
 pygame.init()
-from pygame import mixer
 from pygame.locals import *
 
 from projectile import Projectile
+
+joueur = Joueur()
 
 clock = pygame.time.Clock()
 FPS = 60
@@ -14,12 +15,6 @@ FPS = 60
 longueur = 1080
 largeur = 720
 screen = pygame.display.set_mode((longueur, largeur))
-vaisseau = pygame.image.load('vaisseau.png')
-vaisseau = pygame.transform.scale(vaisseau, (64,64))
-rect = vaisseau.get_rect()
-rect.x = longueur//2
-rect.y = largeur - 100
-
 
 running = True
 
@@ -31,18 +26,20 @@ while running:
 				pygame.quit()
 			if event.type == pygame.QUIT:
 					pygame.quit()
-			if event.key == pygame.K_RIGHT:
-				rect.x += 5
-			if event.key == pygame.K_LEFT:
-				rect.x -= 5
 			if event.key == pygame.K_SPACE:
 				balle = Projectile(-1, 1, (rect.x ,rect.y -64), 1 , screen)
 				balle.draw()
+		keys = pygame.key.get_pressed()
+			
+	if keys[pygame.K_RIGHT] and joueur.rect.x <= longueur - 64:
+      		joueur.move_right()
+    	elif keys[pygame.K_LEFT] and joueur.rect.x >= 0:
+        	joueur.move_left()
 
 
 	#fixer le nombre de fps sur ma clock
 	clock.tick(FPS)
 
-	screen.blit(vaisseau, (rect.x, rect.y))
+	screen.blit(joueur.vaisseau, (joueur.rect.x, joueur.rect.y))
 	pygame.display.update()
 
