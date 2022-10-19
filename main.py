@@ -7,14 +7,14 @@ from pygame.locals import *
 from joueur import Joueur
 from projectile import Projectile
 
-joueur = Joueur()
-
 clock = pygame.time.Clock()
 FPS = 60
 
 longueur = 1080
 largeur = 720
 screen = pygame.display.set_mode((longueur, largeur))
+
+joueur = Joueur(screen)
 
 running = True
 
@@ -38,6 +38,6 @@ while running:
 	#fixer le nombre de fps sur ma clock
 	clock.tick(FPS)
 
-	screen.blit(joueur.vaisseau, (joueur.rect.x, joueur.rect.y))
+	joueur.afficher()
 	pygame.display.update()
 
