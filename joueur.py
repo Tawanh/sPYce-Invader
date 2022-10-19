@@ -22,6 +22,6 @@ class Joueur:
     def move_left(self):
         self.rect.x -= 5
         
-     def afficher(self):
+    def afficher(self):
         self.screen.blit(self.vaisseau, (self.rect.x, self.rect.y))
 
