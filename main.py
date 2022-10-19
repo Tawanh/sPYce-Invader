@@ -27,7 +27,11 @@ while running:
 				running = False
 			if event.type == pygame.QUIT:
 				running = False
-
+			if event.key == pygame.K_SPACE:
+				projectiles.append(Projectile(2 ,(joueur.rect.x+ 16, joueur.rect.y),-1, screen)) #Louis-Léandre :
+                                                                                                 #besoin methode : joueur.get_coord()
+                                                                                                 #qui renvoie le x et le y du rect
+                                       
 	keys = pygame.key.get_pressed()	
 			
 	if keys[pygame.K_RIGHT] and joueur.rect.x <= longueur - 64: 
