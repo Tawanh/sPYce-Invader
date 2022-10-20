@@ -19,8 +19,11 @@ class Projectile:
         self._sens = sens
         self.screen = ecran
         
-    #   Affichage balle
-        self.projectile = pygame.image.load('balle.png')
+    #   Affichage ball
+        if sens == -1:
+            self.projectile = pygame.image.load('balle.png')
+        elif sens == +1:
+            self.projectile = pygame.image.load('balle2.png')
         self.projectile = pygame.transform.scale(self.projectile, (32,32))
         self.rect = self.projectile.get_rect()
         self.rect.x = coords[0]

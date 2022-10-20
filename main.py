@@ -57,9 +57,7 @@ while running:
             if event.type == pygame.QUIT:
                 running = False
             if event.key == pygame.K_SPACE:
-                projectiles.append(Projectile(2 ,(joueur.getCoords(16)),-1, screen)) #Louis-Léandre :
-                                                                                                 #besoin methode : joueur.get_coord()
-                                                                                                 #qui renvoie le x et le y du rect
+                projectiles.append(Projectile(2 ,(joueur.getCoords(16)),-1, screen))
 
     joueur.moov(longueur)
 
@@ -84,7 +82,7 @@ while running:
                             nombre_none +=1
                     if nombre_none == len(liste_ennemi) - 1 - i1:
                         if randint(0,500) == 1:
-                            projectiles.append(Projectile(2 ,j2.getCoord(),+1, screen))
+                            projectiles.append(Projectile(2 ,j2.getCoord(16),+1, screen))
         if compteur == longueur_deplacement_horizontal//vitesse:
             paterne_ennemi_horizontal = False
             compteur = 0
@@ -99,7 +97,7 @@ while running:
                             nombre_none +=1
                     if nombre_none == len(liste_ennemi) - 1 - i1:
                         if randint(0,500) == 1:
-                            projectiles.append(Projectile(2 ,j2.getCoord(),+1, screen))
+                            projectiles.append(Projectile(2 ,j2.getCoord(16),+1, screen))
 
         if compteur == longueur_deplacement_vertical//vitesse:
             paterne_ennemi_horizontal = True
