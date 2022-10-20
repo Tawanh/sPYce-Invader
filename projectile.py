@@ -30,8 +30,8 @@ class Projectile:
             self.add_coords(y = self._sens*5)
             self.screen.blit(self.projectile, (self.rect.x, self.rect.y))
             
-    def is_collide(self):
-        if self.rect.y >=  0  and self.rect.y <= pygame.display.get_window_size()[1] - 32:
+    def is_collide(self, y, objet:object = None):
+        if self.rect.y >=  0  and self.rect.y <= y - 32:
             return False
         return True
     

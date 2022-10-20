@@ -44,7 +44,7 @@ while running:
 	clock.tick(FPS)
 	if projectiles != []:
 		for e in projectiles:
-			if e.is_collide():
+			if e.is_collide(largeur, objet=None):
 				del e
 			else:
 				e.afficher()
