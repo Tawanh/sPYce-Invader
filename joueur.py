@@ -15,13 +15,24 @@ class Joueur:
         self.vie = 3
         self.type_tir = None
         self.screen = ecran
+        self.point = 0
 
     def move_right(self):
         self.rect.x += 5
 
     def move_left(self):
         self.rect.x -= 5
-        
+
     def afficher(self):
         self.screen.blit(self.vaisseau, (self.rect.x, self.rect.y))
 
+    def moov(self, longueur):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_RIGHT] and self.rect.x <= longueur - 64:
+            self.move_right()
+        if keys[pygame.K_LEFT] and self.rect.x >= 0:
+            self.move_left()
+
+    def getCoords(self, add_x = 0, add_y = 0):
+        return (self.rect.x + add_x,self.rect.y + add_y)
