@@ -38,4 +38,6 @@ class Boss:
             self.rect.y += 20
             
     
+            
+    
 
