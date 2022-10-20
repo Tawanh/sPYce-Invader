@@ -42,3 +42,6 @@ class Ennemi:
 
     def getRect(self):
         return self._sprite
+
+    def getCoord(self):
+        return self._position
