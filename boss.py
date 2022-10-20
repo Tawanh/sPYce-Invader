@@ -7,13 +7,13 @@ class Boss:
 
     def __init__(self, ecran):
         self.image_boss = pygame.image.load('invader2.png')
-        self.image_boss = pygame.transform.scale(self.image_boss, (64,64))
+        self.image_boss = pygame.transform.scale(self.image_boss, (128,128))
         self.rect = self.image_boss.get_rect()
         self.rect.x = 1080//2
-        self.rect.y = 720 //2
+        self.rect.y = 100
         self.screen = ecran
         self._pv = 20
-        self.vitesse = 2
+        self.vitesse = 1
 
     def ajouterPv(self,ajout):
         self._pv += ajout
@@ -26,10 +26,16 @@ class Boss:
 
     def movement(self, longueur):
         self.rect.x += self.vitesse
+        self.descente(longueur)
+        
+        
+    def descente(self, longueur):
         if self.rect.x >= longueur - 150:
             self.vitesse *= -1
-            self.rect.y += 100
+            self.rect.y += 20
         if self.rect.x <= 150:
             self.vitesse *= -1
-            self.rect.y += 100
+            self.rect.y += 20
+            
+    
 
