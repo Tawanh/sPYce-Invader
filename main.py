@@ -33,7 +33,7 @@ screen = pygame.display.set_mode((longueur, largeur))
 #variable ennemi
 paterne_ennemi_horizontal = True
 direction = [1,0]
-vitesse = 0,3
+vitesse = 0.3
 longueur_deplacement_vertical = 20
 longueur_deplacement_horizontal = 100
 liste_ennemi = listeEnnemi(18,3,10,20,"invader.png",11*2,8*2,(longueur,largeur),longueur_deplacement_horizontal)
@@ -90,4 +90,4 @@ while running:
     boss.afficher()
     pygame.display.update()
 
-sys.exit() 
+sys.exit()
