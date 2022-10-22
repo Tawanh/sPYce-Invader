@@ -35,7 +35,7 @@ boss = Boss(screen)
 boss_kill = False
 compt = 0
 running = True
-
+delai_tir_joueur = 0
 while running:
     screen.fill([0,0,0])
     for event in pygame.event.get():
@@ -44,8 +44,9 @@ while running:
                 running = False
             if event.type == pygame.QUIT:
                 running = False
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_SPACE and delai_tir_joueur <= 0:
                 projectiles_joueur.append(Projectile(2 ,(joueur.getCoords(16)),-1, screen))
+                delai_tir_joueur = 60
 
     joueur.moov(longueur)
 
@@ -84,7 +85,7 @@ while running:
             paterne_ennemi_horizontal = True
             direction[0] *= -1
             compteur = 0
-
+    delai_tir_joueur -=1  
     boss.movement(longueur)
     joueur.afficher()
     if not boss_kill:
