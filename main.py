@@ -32,6 +32,7 @@ projectiles_joueur = []
 projectiles_ennemis = []
 joueur = Joueur(screen)
 boss = Boss(screen)
+boss_kill = False
 compt = 0
 running = True
 
@@ -56,6 +57,8 @@ while running:
         for i , e in enumerate(projectiles_joueur):
             if e.is_collide(largeur):
                 del e
+            elif not  boss_kill and e.rect.colliderect(boss.getRect()):
+                boss_kill = True
             elif e.is_collide(largeur, liste_ennemi.getlistennemi()): 
                 print("Ennemi mort")
                 projectiles_joueur.pop(i)
@@ -84,7 +87,8 @@ while running:
 
     boss.movement(longueur)
     joueur.afficher()
-    boss.afficher()
+    if not boss_kill:
+        boss.afficher()
     pygame.display.update()
 
 sys.exit()    

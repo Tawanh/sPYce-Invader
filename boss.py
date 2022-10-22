@@ -27,7 +27,8 @@ class Boss:
     def movement(self, longueur):
         self.rect.x += self.vitesse
         self.descente(longueur)
-        
+    def getRect(self):
+        return self.rect
         
     def descente(self, longueur):
         if self.rect.x >= longueur - 150:
