@@ -1,5 +1,4 @@
 import pygame
-
 class Projectile:
     """
     Création d'un instance Projectile:
@@ -33,8 +32,22 @@ class Projectile:
             self.add_coords(y = self._sens*5)
             self.screen.blit(self.projectile, (self.rect.x, self.rect.y))
             
-    def is_collide(self, y, objet:object = None):
-        if self.rect.y >=  0  and self.rect.y <= y - 32:
+    def is_collide(self, y,objet= None, ):
+        if isinstance(objet, list):
+            for l in objet:
+                for i, e in enumerate(l):
+                    if e != None:
+                        eposx, eposy = e.getCoord(8, 11)
+                        print(e.getCoord(), (self.rect.x, self.rect.y))
+                        if self.rect.y <= eposy and eposx + 32 >= self.rect.x >= eposx - e.lenght:
+                            l[i] = None
+                            return True
+            return False
+        elif objet !=None and self.rect.colliderect(objet.rect):
+            objet.kill()
+            return True
+        elif self.rect.y >=  0  and self.rect.y <= y - 32:
+            del self
             return False
         return True
     

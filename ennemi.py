@@ -27,7 +27,7 @@ class Ennemi:
         self._sprite = pygame.transform.scale(Sprite, (Hauteur,Largeur))
         self._pv = PV
         self._position = Position
-
+        self.lenght = Largeur
     def movement(self,vitesse,direction,ecran):
         self._position[0] += vitesse * direction[0]
         self._position[1] += vitesse * direction[1]
@@ -72,3 +72,5 @@ class Liste_ennemi:
                     if nombre_none == len(self._liste_ennemi) - 1 - i1:
                         if randint(0,proba) == 1:
                             projectile.append(Projectile(2 ,j2.getCoord(16),+1, screen))
+    def getlistennemi(self):
+        return self._liste_ennemi

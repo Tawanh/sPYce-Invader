@@ -28,10 +28,11 @@ liste_ennemi = Liste_ennemi(15,4,20,40,"invader.png",11*4,8*4,(longueur,largeur)
 compteur = 0
 
 
-projectiles = []
+projectiles_joueur = []
+projectiles_ennemis = []
 joueur = Joueur(screen)
 boss = Boss(screen)
-
+compt = 0
 running = True
 
 while running:
@@ -43,28 +44,40 @@ while running:
             if event.type == pygame.QUIT:
                 running = False
             if event.key == pygame.K_SPACE:
-                projectiles.append(Projectile(2 ,(joueur.getCoords(16)),-1, screen))
+                projectiles_joueur.append(Projectile(2 ,(joueur.getCoords(16)),-1, screen))
 
     joueur.moov(longueur)
 
 	#fixer le nombre de fps sur ma clock
     clock.tick(FPS)
-    if projectiles != []:
-        for e in projectiles:
-            if e.is_collide(largeur, objet = None):
+    
+    #Detecte les collisons des balles
+    if projectiles_joueur != []:
+        for i , e in enumerate(projectiles_joueur):
+            if e.is_collide(largeur):
                 del e
+            elif e.is_collide(largeur, liste_ennemi.getlistennemi()): 
+                print("Ennemi mort")
+                projectiles_joueur.pop(i)
             else:
                 e.afficher()
+    if projectiles_ennemis != []:
+        for i, e in enumerate(projectiles_ennemis):
+            if e.is_collide(largeur, joueur):
+                projectiles_ennemis.pop(i)
+            else:
+                e.afficher()
+                
     #movement ennemis
     compteur +=1
     if paterne_ennemi_horizontal:
-        liste_ennemi.movement_all_ennemi(vitesse,direction,screen,500,projectiles)
+        liste_ennemi.movement_all_ennemi(vitesse,direction,screen,500,projectiles_ennemis)
         if compteur == longueur_deplacement_horizontal//vitesse:
             paterne_ennemi_horizontal = False
             compteur = 0
     else:
-        liste_ennemi.movement_all_ennemi(vitesse,[0,1],screen,500,projectiles)
-        if compteur == longueur_deplacement_vertical//vitesse:
+        liste_ennemi.movement_all_ennemi(vitesse,[0,1],screen,500,projectiles_ennemis)
+        if compteur == longueur_deplacement_vertical//vitesse:  
             paterne_ennemi_horizontal = True
             direction[0] *= -1
             compteur = 0
@@ -74,4 +87,4 @@ while running:
     boss.afficher()
     pygame.display.update()
 
-sys.exit()
+sys.exit()    

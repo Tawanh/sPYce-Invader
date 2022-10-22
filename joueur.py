@@ -1,7 +1,7 @@
 # Créé par Nathan.zorroche, le 13/10/2022 en Python 3.7
 import pygame
 pygame.init()
-
+import sys
 from pygame.locals import *
 
 class Joueur:
@@ -36,3 +36,7 @@ class Joueur:
 
     def getCoords(self, add_x = 0, add_y = 0):
         return (self.rect.x + add_x,self.rect.y + add_y)
+    #Provisoire, simule la mort
+    def kill(self):
+        print('Mort')
+        sys.exit()
