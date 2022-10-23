@@ -38,7 +38,7 @@ class Projectile:
                 for i, e in enumerate(l):
                     if e != None:
                         eposx, eposy = e.getCoord(8, 11)
-                        if self.rect.y <= eposy and eposx + 32 >= self.rect.x >= eposx - e.lenght:
+                        if self.rect.y <= eposy and eposx + 32 >= self.rect.x >= eposx - e.getScale()[0]:
                             l[i] = None
                             return True
             return False
