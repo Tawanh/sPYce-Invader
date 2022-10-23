@@ -32,7 +32,7 @@ class Projectile:
             self.add_coords(y = self._sens*5)
             self.screen.blit(self.projectile, (self.rect.x, self.rect.y))
             
-    def is_collide(self, y,objet= None, ):
+    def is_collide(self, largeur,objet= None, ):
         if isinstance(objet, list):
             for l in objet:
                 for i, e in enumerate(l):
@@ -45,7 +45,7 @@ class Projectile:
         elif objet is not  None and self.rect.colliderect(objet.rect):
             objet.kill()
             return True
-        elif y-32 >=self.rect.y >=  0:
+        elif largeur-32 >=self.rect.y >=  0:
             del self
             return False
         return True

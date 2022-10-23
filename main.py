@@ -58,10 +58,14 @@ while running:
         for i , e in enumerate(projectiles_joueur):
             if e.is_collide(largeur):
                 del e
+                projectiles_joueur.pop(i)
             elif not  boss_kill and e.rect.colliderect(boss.getRect()):
                 boss_kill = True
+                del e
+                projectiles_joueur.pop(i)
             elif e.is_collide(largeur, liste_ennemi.getlistennemi()): 
                 print("Ennemi mort")
+                del e
                 projectiles_joueur.pop(i)
             else:
                 e.afficher()
