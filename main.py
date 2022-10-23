@@ -50,11 +50,11 @@ while running:
 
     joueur.moov(longueur)
 
-	#fixer le nombre de fps sur ma clock
+    #fixer le nombre de fps sur ma clock
     clock.tick(FPS)
     
     #Detecte les collisons des balles
-    if projectiles_joueur != []:
+    if projectiles_joueur:
         for i , e in enumerate(projectiles_joueur):
             if e.is_collide(largeur):
                 del e
@@ -65,7 +65,7 @@ while running:
                 projectiles_joueur.pop(i)
             else:
                 e.afficher()
-    if projectiles_ennemis != []:
+    if projectiles_ennemis:
         for i, e in enumerate(projectiles_ennemis):
             if e.is_collide(largeur, joueur):
                 projectiles_ennemis.pop(i)

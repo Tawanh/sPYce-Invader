@@ -5,7 +5,7 @@ from turtle import position
 import pygame
 
 
-class Power_up:
+class Powerup:
     def __init__(self, position, screen) -> None:
         self._pos = position
         self._power_up_type = randint(1,4)

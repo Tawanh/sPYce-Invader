@@ -42,20 +42,20 @@ class Ennemi:
         return self._pv
 
     def changeSprite(self,Sprite,Hauteur,Largeur):
-        self.sprite = pygame.transform.scale(Sprite, (Hauteur,Largeur))
+        self._sprite = pygame.transform.scale(Sprite, (Hauteur,Largeur))
 
     def getRect(self):
         return self._sprite
 
     def getCoord(self, add_x = 0, add_y = 0):
-        return (self._position[0] + add_x,self._position[1] + add_y)
+        return self._position[0] + add_x,self._position[1] + add_y
 
     def getScale(self):
         return self._lenght, self._height
 
 class Liste_ennemi:
     def __init__(self, nombre_ennemi_horizontal, nombre_etage_ennemi, espacement_horizontal, espacement_vertical, sprite, hauteur_joueur, largeur_joueur, ecran, longueur_deplacement_horizontal):
-        marge = (ecran[0] - (largeur_joueur * nombre_ennemi_horizontal) - (espacement_horizontal *(nombre_ennemi_horizontal))) / 2
+        marge = (ecran[0] - (largeur_joueur * nombre_ennemi_horizontal) - (espacement_horizontal *nombre_ennemi_horizontal)) / 2
         self._liste_ennemi = []
         splitted_image = sprite.split(".")
         for i1 in range(nombre_etage_ennemi):
@@ -68,11 +68,11 @@ class Liste_ennemi:
     def movement_all_ennemi(self,vitesse,direction,screen,proba,projectile):
         for i1,j1 in enumerate(self._liste_ennemi):
             for i2,j2 in enumerate(j1):
-                if not j2 == None:
+                if j2 is not None:
                     j2.movement(vitesse,direction,screen)
                     nombre_none = 0
                     for i3 in range(i1 + 1, len(self._liste_ennemi)):
-                        if self._liste_ennemi[i3][i2] == None:
+                        if self._liste_ennemi[i3][i2] is None:
                             nombre_none += 1
                     if nombre_none == len(self._liste_ennemi) - 1 - i1:
                         if randint(0,proba) == 1:

@@ -36,29 +36,29 @@ class Projectile:
         if isinstance(objet, list):
             for l in objet:
                 for i, e in enumerate(l):
-                    if e != None:
+                    if e is not None:
                         eposx, eposy = e.getCoord(8, 11)
                         if self.rect.y <= eposy and eposx + 32 >= self.rect.x >= eposx - e.getScale()[0]:
                             l[i] = None
                             return True
             return False
-        elif objet !=None and self.rect.colliderect(objet.rect):
+        elif objet is not  None and self.rect.colliderect(objet.rect):
             objet.kill()
             return True
-        elif self.rect.y >=  0  and self.rect.y <= y - 32:
+        elif y-32 >=self.rect.y >=  0:
             del self
             return False
         return True
     
     def get_coords(self):
-        return (self.rect.x, self.rect.y)
+        return self.rect.x, self.rect.y
     def add_coords(self, x:int = 0, y:int = 0):
         self.rect.x += x
         self.rect.y += y
     def set_coords(self, x:int = None ,y:int = None):
-        if x == None:
+        if x is None:
             x = self.rect.x
-        if y == None:
+        if y is None:
             y = self.rect.y
         self.rect.x = x
         self.rect.y = y
