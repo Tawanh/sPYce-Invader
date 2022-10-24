@@ -6,7 +6,7 @@ from pygame.locals import *
 class Boss:
 
     def __init__(self, ecran):
-        self.image_boss = pygame.image.load('invader2.png')
+        self.image_boss = pygame.image.load('images/invader2.png')
         self.image_boss = pygame.transform.scale(self.image_boss, (128,128))
         self.rect = self.image_boss.get_rect()
         self.rect.x = 1080//2

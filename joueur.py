@@ -7,7 +7,7 @@ from pygame.locals import *
 class Joueur:
 
     def __init__(self, ecran):
-        self.vaisseau = pygame.image.load('vaisseau.png')
+        self.vaisseau = pygame.image.load('images/vaisseau.png')
         self.vaisseau = pygame.transform.scale(self.vaisseau, (64,64))
         self.rect = self.vaisseau.get_rect()
         self.rect.x = 1080//2
