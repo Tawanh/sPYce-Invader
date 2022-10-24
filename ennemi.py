@@ -31,6 +31,7 @@ class Ennemi:
         self._height = Hauteur
 
     def movement(self,vitesse,direction,ecran):
+        self.screen = ecran
         self._position[0] += vitesse * direction[0]
         self._position[1] += vitesse * direction[1]
         ecran.blit(self._sprite, self._position)
@@ -52,6 +53,23 @@ class Ennemi:
 
     def getScale(self):
         return self._lenght, self._height
+    def kill(self, type, tuple_index):
+        if type == 0:
+            self.image = pygame.image.load('images/death0.png').convert_alpha()
+            self.changeSprite(self.image, self._height, self._lenght)
+        if type == 1:
+            self.image = pygame.image.load('images/death1.png').convert_alpha()
+            self.changeSprite(self.image, self._height, self._lenght)
+        if type == 2:
+            self.image = pygame.image.load('images/death2.png').convert_alpha()
+            self.changeSprite(self.image, self._height, self._lenght)
+        if type == 3:
+            self.image = pygame.image.load('images/death3.png').convert_alpha()
+            self.changeSprite(self.image, self._height, self._lenght)
+        self.screen.blit(self._sprite, self._position)
+        tuple_index[1][tuple_index[0]] = None
+            
+        
 
 class Liste_ennemi:
     def __init__(self, nombre_ennemi_horizontal, nombre_etage_ennemi, espacement_horizontal, espacement_vertical, sprite, hauteur_joueur, largeur_joueur, ecran, longueur_deplacement_horizontal):

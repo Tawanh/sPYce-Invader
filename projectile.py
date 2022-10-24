@@ -34,12 +34,12 @@ class Projectile:
             
     def is_collide(self, largeur,objet= None, ):
         if isinstance(objet, list):
-            for l in objet:
+            for k ,l in enumerate(objet):
                 for i, e in enumerate(l):
                     if e is not None:
                         eposx, eposy = e.getCoord(8, 11)
                         if self.rect.y <= eposy and eposx + 32 >= self.rect.x >= eposx - e.getScale()[0]:
-                            l[i] = None
+                            l[i].kill(k, (i,l))
                             return True
             return False
         elif objet is not  None and self.rect.colliderect(objet.rect):

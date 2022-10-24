@@ -37,6 +37,10 @@ class Boss:
         if self.rect.x <= 150:
             self.vitesse *= -1
             self.rect.y += 20
+    def kill(self):
+        self.image_boss = pygame.image.load('images/death2.png')
+        self.image_boss = pygame.transform.scale(self.image_boss, (128,128))
+        self.afficher()
             
     
             

@@ -59,6 +59,7 @@ while running:
             if e.is_collide(largeur):
                 del e
             elif not  boss_kill and e.rect.colliderect(boss.getRect()):
+                boss.kill()
                 boss_kill = True
             elif e.is_collide(largeur, liste_ennemi.getlistennemi()): 
                 print("Ennemi mort")
