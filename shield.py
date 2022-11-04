@@ -18,11 +18,12 @@ class Shield_Square:
         elif orientation == "haut":
             self._index_haut += 1
 
-        if self._index_bas + self._index_haut == 4:
+        if self._index_bas + self._index_haut > 4:
             return False
 
         self._sprite = self._splitted_sprite[0] + str(self._index_haut) + str(self._index_bas) + "." + self._splitted_sprite[1]
         self._sprite = pygame.image.load(self._sprite)
+        self._sprite = pygame.transform.scale(self._sprite,self._taille)
         return True
     
     def afficher(self, ecran):

@@ -7,8 +7,8 @@ from joueur import Joueur
 from projectile import Projectile
 from boss import Boss
 import sys
-from ennemi import Ennemi,Liste_ennemi
-from random import randint
+from ennemi import Liste_ennemi
+from shield import Shield, Shield_Square
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -26,6 +26,9 @@ longueur_deplacement_vertical = 20
 longueur_deplacement_horizontal = 100
 liste_ennemi = Liste_ennemi(15,4,20,40,"images/invader.png",11*4,8*4,(longueur,largeur),longueur_deplacement_horizontal)
 compteur = 0
+
+#variable bouclier
+liste_shield = Shield((200,200) , 15, "images/bouclier.png")
 
 
 projectiles_joueur = []
@@ -47,6 +50,10 @@ while running:
             if event.key == pygame.K_SPACE and delai_tir_joueur <= 0:
                 projectiles_joueur.append(Projectile(2 ,(joueur.getCoords(16)),-1, screen))
                 delai_tir_joueur = 60
+            if event.key == pygame.K_b:
+                list = liste_shield.get_liste()[0].detruire("bas")
+            if event.key == pygame.K_h:
+                list = liste_shield.get_liste()[0].detruire("haut")
 
     joueur.moov(longueur)
 
@@ -91,6 +98,11 @@ while running:
     joueur.afficher()
     if not boss_kill:
         boss.afficher()
+    
+    #bouclier
+    liste_shield.afficher(screen)
+
+
     pygame.display.update()
 
 sys.exit()    
