@@ -25,10 +25,16 @@ class Shield_Square:
         self._sprite = pygame.image.load(self._sprite)
         self._sprite = pygame.transform.scale(self._sprite,self._taille)
         return True
-    
+
     def afficher(self, ecran):
         ecran.blit(self._sprite,self._position)
-        
+
+    def getCoord(self):
+        return self._position[0],self._position[1]
+
+    def getScale(self):
+        return self._taille
+
 
 class Shield:
     def __init__(self, position, taille_square, sprite):
@@ -40,7 +46,11 @@ class Shield:
 
     def afficher(self, ecran):
         for i in self._liste_shield_square:
-            i.afficher(ecran)
+            if i is not None:
+                i.afficher(ecran)
 
     def get_liste(self):
         return self._liste_shield_square
+
+    def destroyShield(self,index):
+        self._liste_shield_square[index] = None

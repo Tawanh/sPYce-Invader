@@ -18,7 +18,7 @@ longueur = 1080
 largeur = 720
 screen = pygame.display.set_mode((longueur, largeur))
 
-#variable ennemi 
+#variable ennemi
 paterne_ennemi_horizontal = True
 direction = [1,0]
 vitesse = 0.3
@@ -28,7 +28,7 @@ liste_ennemi = Liste_ennemi(15,4,20,40,"images/invader.png",11*4,8*4,(longueur,l
 compteur = 0
 
 #variable bouclier
-liste_shield = Shield((200,200) , 15, "images/bouclier.png")
+liste_shield = Shield((500,400) , 50, "images/bouclier.png")
 
 
 projectiles_joueur = []
@@ -59,7 +59,7 @@ while running:
 
 	#fixer le nombre de fps sur ma clock
     clock.tick(FPS)
-    
+
     #Detecte les collisons des balles
     if projectiles_joueur != []:
         for i , e in enumerate(projectiles_joueur):
@@ -68,8 +68,10 @@ while running:
             elif not  boss_kill and e.rect.colliderect(boss.getRect()):
                 boss.kill()
                 boss_kill = True
-            elif e.is_collide(largeur, liste_ennemi.getlistennemi()): 
+            elif e.is_collide(largeur, liste_ennemi.getlistennemi()):
                 print("Ennemi mort")
+                projectiles_joueur.pop(i)
+            elif e.is_collide(largeur, liste_shield, True, "haut"):
                 projectiles_joueur.pop(i)
             else:
                 e.afficher()
@@ -77,9 +79,11 @@ while running:
         for i, e in enumerate(projectiles_ennemis):
             if e.is_collide(largeur, joueur):
                 projectiles_ennemis.pop(i)
+            elif e.is_collide(largeur, liste_shield, True, "bas"):
+                projectiles_ennemis.pop(i)
             else:
                 e.afficher()
-                
+
     #movement ennemis
     compteur +=1
     if paterne_ennemi_horizontal:
@@ -89,20 +93,20 @@ while running:
             compteur = 0
     else:
         liste_ennemi.movement_all_ennemi(vitesse,[0,1],screen,500,projectiles_ennemis)
-        if compteur == longueur_deplacement_vertical//vitesse:  
+        if compteur == longueur_deplacement_vertical//vitesse:
             paterne_ennemi_horizontal = True
             direction[0] *= -1
             compteur = 0
-    delai_tir_joueur -=1  
+    delai_tir_joueur -=1
     boss.movement(longueur)
     joueur.afficher()
     if not boss_kill:
         boss.afficher()
-    
+
     #bouclier
     liste_shield.afficher(screen)
 
 
     pygame.display.update()
 
-sys.exit()    
+sys.exit()

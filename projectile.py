@@ -11,13 +11,13 @@ class Projectile:
         Méthode :
             afficher() : permet l'affichage de la balle et la deplace a chaque fois que la fonction est appellée -> None
             is_collide() : detecte si la balle touche un ennemi ou un bord de l'ecran, et retourne True ou false -> Bool
-            mutateurs et acceseur permetant le changement et l'affichage de : damage, rect.x , rect.y 
+            mutateurs et acceseur permetant le changement et l'affichage de : damage, rect.x , rect.y
     """
     def __init__(self,degat:int = 1, coords:tuple = (0,0),sens:int = 0, ecran = 0) -> None:
         self._damage = degat
         self._sens = sens
         self.screen = ecran
-        
+
     #   Affichage ball
         if sens == -1:
             self.projectile = pygame.image.load('images/balle.png')
@@ -27,13 +27,24 @@ class Projectile:
         self.rect = self.projectile.get_rect()
         self.rect.x = coords[0]
         self.rect.y = coords[1]
-    
+
     def afficher(self):
             self.add_coords(y = self._sens*5)
             self.screen.blit(self.projectile, (self.rect.x, self.rect.y))
-            
-    def is_collide(self, largeur,objet= None, ):
-        if isinstance(objet, list):
+
+    def is_collide(self, largeur,objet = None, bouclier = False, direction = False):
+        if bouclier:
+            for k, l in enumerate(objet.get_liste()):
+                if l is not None:
+                    lposx, lposy = l.getCoord()
+                    if self.rect.y <= lposy and lposx + 32 >= self.rect.x >= lposx - l.getScale()[0]:
+                        a = l.detruire("haut")
+                        return True
+                        if not a:
+                            objet.destroyShield(k)
+                            return True
+            return False
+        elif isinstance(objet, list):
             for k ,l in enumerate(objet):
                 for i, e in enumerate(l):
                     if e is not None:
@@ -49,7 +60,7 @@ class Projectile:
             del self
             return False
         return True
-    
+
     def get_coords(self):
         return self.rect.x, self.rect.y
     def add_coords(self, x:int = 0, y:int = 0):
@@ -62,16 +73,15 @@ class Projectile:
             y = self.rect.y
         self.rect.x = x
         self.rect.y = y
-        
+
     def get_damage(self):
         return self._damage
     def set_damage(self, damage):
         self._damage = damage
     def add_damage(self,damage):
         self._damage += damage
-        
-
-        
 
 
-        
+
+
+
