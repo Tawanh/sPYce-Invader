@@ -4,7 +4,29 @@ from random import randint
 from pygame.locals import *
 from projectile import Projectile
 class Boss:
+    """
+    Création d'un instance Boss:
+        boss = Boss(ecran)
 
+    attributs d'instance :
+        vaisseau = l'image du joueur
+        rect.x = position x du joueur
+        rect.y = position y du joueur
+        vie = vie du joueur
+        _score = score du joueur
+        coeur_remplie = image de la vie restante du joueur
+        coeur_vide = image de la vie perdu du joueur
+
+    attributs de classe:
+        Méthode :
+            
+            afficher() fait afficher le boss sur l'écran
+            movement(longueur, projectile) fait se déplacer le boss selon sa vitesse sur l'axe des x puis choisi un nombre aleatoire entre 0 et
+            30, si celui ci tombe sur 4 le boss envoie un projectile
+            descente(longueur) si le boss s'approche du bord de la fenetre il descend de 10 pixel puis change son déplacement dans l'axe des x pour
+            que celui ci se deplace dans le sens opposer
+            kill() affiche une image de mort des que le boss meurt
+    """
     def __init__(self, ecran):
         self.image_boss = pygame.image.load('images/invader2.png')
         self.image_boss = pygame.transform.scale(self.image_boss, (128,128))
