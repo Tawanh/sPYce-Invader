@@ -1,3 +1,5 @@
+#Crée par Louis-Léandre DEMARE le 17/10/2022 
+
 import pygame
 class Projectile:
     """
