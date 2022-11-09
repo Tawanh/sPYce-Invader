@@ -15,7 +15,7 @@ clock = pygame.time.Clock()
 FPS = 60
 
 longueur = 1080
-largeur = 720
+largeur = 800
 screen = pygame.display.set_mode((longueur, largeur))
 font = pygame.font.Font("font/CosmicAlien-V4Ax.ttf", 50)
 
