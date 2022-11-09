@@ -17,6 +17,7 @@ FPS = 60
 longueur = 1080
 largeur = 720
 screen = pygame.display.set_mode((longueur, largeur))
+font = pygame.font.Font("font/CosmicAlien-V4Ax.ttf", 50)
 
 #variable ennemi
 paterne_ennemi_horizontal = True
@@ -64,8 +65,11 @@ while running:
             if e.is_collide(largeur):
                 del e
             elif not  boss_kill and e.rect.colliderect(boss.getRect()):
-                boss.kill()
-                boss_kill = True
+                projectiles_joueur.pop(i)
+                boss._pv -= 1
+                if boss._pv ==0:
+                    boss.kill()
+                    boss_kill = True
             elif e.is_collide(largeur, liste_ennemi.getlistennemi()):
                 print("Ennemi mort")
                 projectiles_joueur.pop(i)
@@ -96,16 +100,28 @@ while running:
             direction[0] *= -1
             compteur = 0
     delai_tir_joueur -=1
-    boss.movement(longueur)
+    
     joueur.afficher()
-    if not boss_kill:
-        boss.afficher()
+    
 
     #bouclier
     for i in liste_tout_shield:
         i.afficher(screen)
 
+    #score
+    score_texte = font.render(f"Score : {joueur._score}", 1, (255,255,255))
+    screen.blit(score_texte, (380, 700))
 
+    #vie
+    joueur.affiche_vie()
+
+    #Apparition du boss
+    if joueur._score == 20:
+        liste_ennemi._liste_ennemi = []
+        if not boss_kill:
+            boss.afficher()
+            boss.movement(longueur, projectiles_ennemis)
+		
     pygame.display.update()
 
 sys.exit()
