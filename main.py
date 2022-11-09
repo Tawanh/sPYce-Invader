@@ -8,7 +8,7 @@ from projectile import Projectile
 from boss import Boss
 import sys
 from ennemi import Liste_ennemi
-from shield import Shield, Shield_Square
+from shield import Shield
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -32,7 +32,6 @@ compteur = 0
 liste_tout_shield = []
 for i in range(4):
     liste_tout_shield.append(Shield((100 + i * 250,500) , 30, "images/bouclier.png","images/boucliergauche.png","images/bouclierdroit.png"))
-print(liste_tout_shield)
 
 projectiles_joueur = []
 projectiles_ennemis = []
@@ -52,7 +51,7 @@ while running:
                 running = False
             if event.key == pygame.K_SPACE and delai_tir_joueur <= 0:
                 projectiles_joueur.append(Projectile(2 ,(joueur.getCoords(16)),-1, screen))
-                delai_tir_joueur = 60
+                # delai_tir_joueur = 60
 
     joueur.moov(longueur)
 
@@ -64,7 +63,7 @@ while running:
         for i , e in enumerate(projectiles_joueur):
             if e.is_collide(largeur):
                 del e
-            elif not  boss_kill and e.rect.colliderect(boss.getRect()):
+            elif not  boss_kill and e.rect.colliderect(boss.getRect()) and joueur._score >= 200:
                 projectiles_joueur.pop(i)
                 boss._pv -= 1
                 if boss._pv ==0:
@@ -72,7 +71,7 @@ while running:
                     boss_kill = True
             elif e.is_collide(largeur, liste_ennemi.getlistennemi()):
                 print("Ennemi mort")
-		joueur.ajout_score()
+                joueur.ajout_score()
                 projectiles_joueur.pop(i)
             elif e.is_collide(largeur, liste_tout_shield, True, "haut"):
                 projectiles_joueur.pop(i)
