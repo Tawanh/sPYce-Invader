@@ -2,7 +2,7 @@ import pygame
 import sys
 
 class Shield_Square:
-    def __init__(self, Position, Sprite, taille):
+    def __init__(self, Position, Sprite, taille, bord = False):
         self._index_haut = 0
         self._index_bas = 0
         self._splitted_sprite = Sprite.split(".")
@@ -11,9 +11,12 @@ class Shield_Square:
         self._position = Position
         self._taille = taille
         self._sprite = pygame.transform.scale(self._sprite,taille)
+        self._bord = bord
 
     def detruire(self, orientation):
-        if self._index_bas + self._index_haut == 4:
+        if self._index_bas + self._index_haut == 4 and not self._bord:
+            return False
+        elif self._index_bas + self._index_haut == 2:
             return False
         if orientation == "bas":
             self._index_bas += 1
@@ -36,12 +39,17 @@ class Shield_Square:
 
 
 class Shield:
-    def __init__(self, position, taille_square, sprite):
+    def __init__(self, position, taille_square, sprite, spritegauche, spritedroit):
         self._position = position
         self._liste_shield_square = []
         for i1 in range(4):
             for i2 in range(2):
-                self._liste_shield_square.append(Shield_Square((i1*taille_square + position[0],i2*taille_square + position[1]),sprite,(taille_square,taille_square)))
+                if i1 == 0 and i2 == 0:
+                    self._liste_shield_square.append(Shield_Square((i1*taille_square + position[0],i2*taille_square + position[1]),spritegauche,(taille_square,taille_square),True))
+                elif i1 == 3 and i2 == 0:
+                    self._liste_shield_square.append(Shield_Square((i1*taille_square + position[0],i2*taille_square + position[1]),spritedroit,(taille_square,taille_square),True))
+                else:
+                    self._liste_shield_square.append(Shield_Square((i1*taille_square + position[0],i2*taille_square + position[1]),sprite,(taille_square,taille_square)))
 
     def afficher(self, ecran):
         for i in self._liste_shield_square:

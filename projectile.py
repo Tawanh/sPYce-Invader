@@ -34,14 +34,15 @@ class Projectile:
 
     def is_collide(self, largeur,objet = None, bouclier = False, direction = False):
         if bouclier:
-            for k, l in enumerate(objet.get_liste()):
-                if l is not None:
-                    lposx, lposy = l.getCoord()
-                    if lposy - l.getScale()[1]/2 <= self.rect.y <= lposy + l.getScale()[1]/2 and lposx - l.getScale()[0]/2 <= self.rect.x <= lposx + l.getScale()[0]/2:
-                        a = l.detruire(direction)
-                        if not a:
-                            objet.destroyShield(k)
-                        return True
+            for i in objet:
+                for k, l in enumerate(i.get_liste()):
+                    if l is not None:
+                        lposx, lposy = l.getCoord()
+                        if lposy - l.getScale()[1]/2 <= self.rect.y <= lposy + l.getScale()[1]/2 and lposx - l.getScale()[0]/2 <= self.rect.x <= lposx + l.getScale()[0]/2:
+                            a = l.detruire(direction)
+                            if not a:
+                                i.destroyShield(k)
+                            return True
             return False
         elif isinstance(objet, list):
             for k ,l in enumerate(objet):

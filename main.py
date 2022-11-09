@@ -28,8 +28,10 @@ liste_ennemi = Liste_ennemi(15,4,20,40,"images/invader.png",11*4,8*4,(longueur,l
 compteur = 0
 
 #variable bouclier
-liste_shield = Shield((500,400) , 30, "images/bouclier.png")
-
+liste_tout_shield = []
+for i in range(4):
+    liste_tout_shield.append(Shield((100 + i * 250,500) , 30, "images/bouclier.png","images/boucliergauche.png","images/bouclierdroit.png"))
+print(liste_tout_shield)
 
 projectiles_joueur = []
 projectiles_ennemis = []
@@ -50,10 +52,6 @@ while running:
             if event.key == pygame.K_SPACE and delai_tir_joueur <= 0:
                 projectiles_joueur.append(Projectile(2 ,(joueur.getCoords(16)),-1, screen))
                 delai_tir_joueur = 60
-            if event.key == pygame.K_b:
-                list = liste_shield.get_liste()[0].detruire("bas")
-            if event.key == pygame.K_h:
-                list = liste_shield.get_liste()[0].detruire("haut")
 
     joueur.moov(longueur)
 
@@ -71,7 +69,7 @@ while running:
             elif e.is_collide(largeur, liste_ennemi.getlistennemi()):
                 print("Ennemi mort")
                 projectiles_joueur.pop(i)
-            elif e.is_collide(largeur, liste_shield, True, "haut"):
+            elif e.is_collide(largeur, liste_tout_shield, True, "haut"):
                 projectiles_joueur.pop(i)
             else:
                 e.afficher()
@@ -79,7 +77,7 @@ while running:
         for i, e in enumerate(projectiles_ennemis):
             if e.is_collide(largeur, joueur):
                 projectiles_ennemis.pop(i)
-            elif e.is_collide(largeur, liste_shield, True, "bas"):
+            elif e.is_collide(largeur, liste_tout_shield, True, "bas"):
                 projectiles_ennemis.pop(i)
             else:
                 e.afficher()
@@ -104,7 +102,8 @@ while running:
         boss.afficher()
 
     #bouclier
-    liste_shield.afficher(screen)
+    for i in liste_tout_shield:
+        i.afficher(screen)
 
 
     pygame.display.update()
