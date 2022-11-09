@@ -12,6 +12,7 @@ from projectile import Projectile
 from boss import Boss
 from ennemi import Liste_ennemi
 from shield import Shield
+from phases import Phase
 
 
 #init fenetre pygame
@@ -40,17 +41,20 @@ for i in range(4):
 joueur = Joueur(screen)
 boss = Boss(screen)
 
+#Initialisation de la classe Phase
+game_status = Phase(screen)
+etat = joueur.etat
+
 boss_kill = False
 compt = 0
 running = True
 delai_tir_joueur = 0
 projectiles_joueur = []
 projectiles_ennemis = []
-etat = "alive"
 
 while running:
-
-    if etat == "alive":  
+    
+    if etat == "alive":
         etat = joueur.etat
         screen.fill([0,0,0])
         for event in pygame.event.get():
@@ -136,38 +140,12 @@ while running:
                 boss.movement(longueur, projectiles_ennemis)
             else:
                 etat = "win"
-        
+                
+    #Regarde l'etat de la partie et agis en fonction
+    running = game_status.win(etat)
+    running =game_status.game_over(etat)
     
-    #Changement de phase de jeux, lose or win
-
-    elif etat == "dead":
-            screen.fill([0,0,0])
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        running = False
-                    if event.type == pygame.QUIT:
-                        running = False
-            font = pygame.font.Font('font/game_over.ttf', 128)
-            texte_game_over = font.render('Oh non tu as perdu... ', True, (255,0,0))
-            texte_encouragement = font.render('Tu feras mieux la prochaine fois', True, (255,255,255))
-            texte_quitter = font.render('Appuie sur \'echap\' quitter', True, (128,128,128))
-            screen.blit(texte_game_over, (screen.get_width()//2 - texte_game_over.get_width()//2,screen.get_height()//2 - texte_game_over.get_height()//2-100))
-            screen.blit(texte_encouragement, (screen.get_width()//2 - texte_encouragement.get_width()//2,screen.get_height()//2 - texte_encouragement.get_height()//2))
-            screen.blit(texte_quitter, (screen.get_width()//2 - texte_quitter.get_width()//2,screen.get_height()//2 - texte_quitter.get_height()//2+100))
-    elif etat == "win":
-            screen.fill([0,0,0])
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        running = False
-                    if event.type == pygame.QUIT:
-                        running = False
-            font = pygame.font.Font('font/game_over.ttf', 128)
-            texte_game_over = font.render('Bravo, tu as gagné contre le boss !', True, (0,255,0))
-            texte_quitter = font.render('Appuie sur la touche \'echap\' pour quitter ', True, (128,128,128))
-            screen.blit(texte_game_over, (screen.get_width()//2 - texte_game_over.get_width()//2,screen.get_height()//2 - texte_game_over.get_height()//2 - 100))
-            screen.blit(texte_quitter, (screen.get_width()//2 - texte_quitter.get_width()//2,screen.get_height()//2 - texte_quitter.get_height()//2))
     pygame.display.update()
-
+    etat = joueur.etat
+    
 sys.exit()
