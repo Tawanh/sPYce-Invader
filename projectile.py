@@ -56,7 +56,7 @@ class Projectile:
         elif objet is not  None and self.rect.colliderect(objet.rect):
             objet.kill()
             return True
-        elif largeur-32 >=self.rect.y >=  0:
+        elif largeur-150>=self.rect.y >=  0:
             del self
             return False
         return True
@@ -73,15 +73,3 @@ class Projectile:
             y = self.rect.y
         self.rect.x = x
         self.rect.y = y
-
-    def get_damage(self):
-        return self._damage
-    def set_damage(self, damage):
-        self._damage = damage
-    def add_damage(self,damage):
-        self._damage += damage
-
-
-
-
-

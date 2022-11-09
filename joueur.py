@@ -37,7 +37,6 @@ class Joueur:
         self.rect.x = 1080//2
         self.rect.y = 720 - 100
         self.vie = 3
-        self.type_tir = None
         self.screen = ecran
         self._score = 0
         self.vitesse = 5
@@ -45,7 +44,7 @@ class Joueur:
         self.coeur_rempli = pygame.transform.scale(self.coeur_rempli, (64,50))
         self.coeur_vide = pygame.image.load('images/coeur_vide.png')
         self.coeur_vide = pygame.transform.scale(self.coeur_vide, (64,50))
-
+        self.etat = "alive"
     def move_right(self):
         self.rect.x += self.vitesse
 
@@ -69,8 +68,7 @@ class Joueur:
     def kill(self):
         self.vie -= 1
         if self.vie == 0:
-            sys.exit()
-            
+            self.etat = "dead"
     def ajout_score(self):
         self._score += 10
 
