@@ -37,12 +37,11 @@ class Projectile:
             for k, l in enumerate(objet.get_liste()):
                 if l is not None:
                     lposx, lposy = l.getCoord()
-                    if self.rect.y <= lposy and lposx + 32 >= self.rect.x >= lposx - l.getScale()[0]:
-                        a = l.detruire("haut")
-                        return True
+                    if lposy - l.getScale()[1]/2 <= self.rect.y <= lposy + l.getScale()[1]/2 and lposx - l.getScale()[0]/2 <= self.rect.x <= lposx + l.getScale()[0]/2:
+                        a = l.detruire(direction)
                         if not a:
                             objet.destroyShield(k)
-                            return True
+                        return True
             return False
         elif isinstance(objet, list):
             for k ,l in enumerate(objet):

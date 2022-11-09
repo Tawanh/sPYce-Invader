@@ -28,7 +28,7 @@ liste_ennemi = Liste_ennemi(15,4,20,40,"images/invader.png",11*4,8*4,(longueur,l
 compteur = 0
 
 #variable bouclier
-liste_shield = Shield((500,400) , 50, "images/bouclier.png")
+liste_shield = Shield((500,400) , 30, "images/bouclier.png")
 
 
 projectiles_joueur = []
