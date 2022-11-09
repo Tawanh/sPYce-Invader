@@ -5,7 +5,31 @@ import sys
 from pygame.locals import *
 
 class Joueur:
+    """
+    Création d'un instance Joueur:
+        joueur = Joueur(screen)
 
+    attributs d'instance :
+        vaisseau = l'image du joueur
+        rect.x = position x du joueur
+        rect.y = position y du joueur
+        vie = vie du joueur
+        _score = score du joueur
+        coeur_remplie = image de la vie restante du joueur
+        coeur_vide = image de la vie perdu du joueur
+
+    attributs de classe:
+        Méthode :
+            move_right() fait bouger le joueur de "vitesse" pixel dans le sens "x" (self.rect.x)
+            move_left() fait bouger le joueur de "vitesse" pixel dans le sens "y" (self.rect.y)
+            afficher() fait afficher le joueur sur l'écran
+            moov(longueur) prend dans une variable "keys" les touches appuyer par le joueur, si le joueur appuie sur la fleche de gauche
+            cela appele la méthode move_left(). si le joueur appuie sur la fleche de droite cela appele la méthode move_right()
+            getCoords(add_x = 0, add_y = 0) renvoie les coordonnées du joueur en ajoutant quelque pixel selon la demande pour trouver
+            le centre de l'image
+            kill() arrete le jeux si le joueur a 0 de vie
+            affiche_vie() affiche sur l'ecran les coeurs du joueur selon sa vie 
+    """
     def __init__(self, ecran):
         self.vaisseau = pygame.image.load('images/vaisseau.png')
         self.vaisseau = pygame.transform.scale(self.vaisseau, (64,64))
