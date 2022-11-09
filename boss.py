@@ -24,7 +24,7 @@ class Boss:
     def afficher(self):
         self.screen.blit(self.image_boss, (self.rect.x, self.rect.y))
 
-    def movement(self, longueur):
+    def movement(self, longueur, projectile):
         self.rect.x += self.vitesse
         self.descente(longueur)
         x = randint(0,30)
