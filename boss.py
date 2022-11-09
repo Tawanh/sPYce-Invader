@@ -2,7 +2,7 @@ import pygame
 pygame.init()
 from random import randint
 from pygame.locals import *
-
+from projectile import Projectile
 class Boss:
 
     def __init__(self, ecran):
