@@ -40,16 +40,17 @@ class Joueur:
         self.type_tir = None
         self.screen = ecran
         self._score = 0
+        self.vitesse = 5
         self.coeur_rempli = pygame.image.load('images/coeur_remplie.png')
         self.coeur_rempli = pygame.transform.scale(self.coeur_rempli, (64,50))
         self.coeur_vide = pygame.image.load('images/coeur_vide.png')
         self.coeur_vide = pygame.transform.scale(self.coeur_vide, (64,50))
 
     def move_right(self):
-        self.rect.x += 5
+        self.rect.x += self.vitesse
 
     def move_left(self):
-        self.rect.x -= 5
+        self.rect.x -= self.vitesse
 
     def afficher(self):
         self.screen.blit(self.vaisseau, (self.rect.x, self.rect.y))
