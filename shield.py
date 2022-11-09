@@ -2,6 +2,20 @@ import pygame
 import sys
 
 class Shield_Square:
+    """
+    Création d'un instance Shield_Square:
+        liste_square = Liste_Square(Position([float,float]), Sprite(str), taille([float,float]), bord(bool))
+
+    attributs d'instance :
+        _index_haut,_index_bas,_splitted_sprite,_sprite,_position,_taille,_bord
+
+    attributs de classe:
+        Méthode :
+            detruire(orientation) change le sprite du bouclier et renvoie True si le bouclier doit encore exister
+            afficher(ecran) affiche le bouclier sur ecran
+            getCoord() renvoie la position du bouclier
+            getScale() renvoie la taille du bouclier
+    """
     def __init__(self, Position, Sprite, taille, bord = False):
         self._index_haut = 0
         self._index_bas = 0
@@ -39,6 +53,19 @@ class Shield_Square:
 
 
 class Shield:
+    """
+    Création d'un instance Shield:
+        square = Square(position([int,int]), taille_square([int,int]), sprite(str), spritegauche(str), spritedroit(str))
+
+    attributs d'instance :
+        _liste_shield_square,_position
+
+    attributs de classe:
+        Méthode :
+            afficher(ecran) afficher tout les boucliers de la liste sur ecran
+            get_liste() renvoie la liste de bouclier
+            destroyShield(index) detrui le bouclier a l'index "index" (le transforme en None)
+    """
     def __init__(self, position, taille_square, sprite, spritegauche, spritedroit):
         self._position = position
         self._liste_shield_square = []

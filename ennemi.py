@@ -21,7 +21,10 @@ class Ennemi:
             ajouterPv(ajout) ajoute le nombre "ajout" a la variable d'instance pv
             getPv() retourne la variable d'instance pv
             changeSprite(Sprite) change l'image de l'instance en fonction de "Sprite" et modifie sa grandeur avec "Hauteur" et "Largeur"
-            testCollider(rect) test si l'instance est entré en collison avec un autre rect et renvoie la reponse sous forme de bool
+            getRect() renvoie le rect de l'ennemi
+            getCoord() renvoie les coordonnées de l'ennemi sous forme de deux float
+            getScale() renvoie la taille de l'ennemi sous forme de deux float
+            kill() tue l'ennemie
     """
     def __init__(self,Sprite,PV,Hauteur,Largeur,Position = [0,0]):
         self._sprite = pygame.transform.scale(Sprite, (Hauteur,Largeur))
@@ -73,6 +76,18 @@ class Ennemi:
 
 
 class Liste_ennemi:
+    """
+    Création d'un instance Liste_ennemi:
+        liste_ennemie = Liste_ennemie(nombre_ennemi_horizontal(int), nombre_etage_ennemi(int), espacement_horizontal(float), espacement_vertical(float), sprite(str), hauteur_joueur(float), largeur_joueur(float), ecran(pygame surface), longueur_deplacement_horizontal(float))
+
+    attributs d'instance :
+        _liste_ennemi
+
+    attributs de classe:
+        Méthode :
+            movement_all_ennemi(vitesse,direction,screen,proba,projectile) fait bouger (vitesse,direction,screen) et tiré (proba,projectile) tout les ennemis
+            getlistennemi() renvoie la liste d'ennemi
+    """
     def __init__(self, nombre_ennemi_horizontal, nombre_etage_ennemi, espacement_horizontal, espacement_vertical, sprite, hauteur_joueur, largeur_joueur, ecran, longueur_deplacement_horizontal):
         marge = (ecran[0] - (largeur_joueur * nombre_ennemi_horizontal) - (espacement_horizontal *nombre_ennemi_horizontal)) / 2
         self._liste_ennemi = []

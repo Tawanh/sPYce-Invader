@@ -30,7 +30,7 @@ vitesse = 0.3
 longueur_deplacement_vertical = 20
 longueur_deplacement_horizontal = 100
 
-liste_ennemi = Liste_ennemi(15,4,20,40,"images/invader.png",11*4,8*4,(longueur,largeur),longueur_deplacement_horizontal)
+liste_ennemi = Liste_ennemi(13,4,30,50,"images/invader.png",11*3.5,8*3.5,(longueur,largeur),longueur_deplacement_horizontal)
 compteur = 0
 
 #variable bouclier
@@ -60,7 +60,7 @@ while running:
                 if event.type == pygame.QUIT:
                     running = False
                 if event.key == pygame.K_SPACE and delai_tir_joueur <= 0:
-                    projectiles_joueur.append(Projectile(2 ,(joueur.getCoords(16)),-1, screen))
+                    projectiles_joueur.append(Projectile(2 ,(joueur.getCoords(22,-11)),-1, screen))
                     if joueur._score >= 200:
                         delai_tir_joueur = 30
                     else:

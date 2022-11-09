@@ -32,7 +32,7 @@ class Joueur:
     """
     def __init__(self, ecran):
         self.vaisseau = pygame.image.load('images/vaisseau.png')
-        self.vaisseau = pygame.transform.scale(self.vaisseau, (64,64))
+        self.vaisseau = pygame.transform.scale(self.vaisseau, (60,40))
         self.rect = self.vaisseau.get_rect()
         self.rect.x = 1080//2
         self.rect.y = 720 - 100

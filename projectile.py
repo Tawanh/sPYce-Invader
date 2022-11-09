@@ -23,7 +23,7 @@ class Projectile:
             self.projectile = pygame.image.load('images/balle.png')
         elif sens == +1:
             self.projectile = pygame.image.load('images/balle2.png')
-        self.projectile = pygame.transform.scale(self.projectile, (32,32))
+        self.projectile = pygame.transform.scale(self.projectile, (25,25))
         self.rect = self.projectile.get_rect()
         self.rect.x = coords[0]
         self.rect.y = coords[1]
