@@ -1,6 +1,6 @@
 import pygame
 pygame.init()
-
+from random import randint
 from pygame.locals import *
 
 class Boss:
