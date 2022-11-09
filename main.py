@@ -117,7 +117,7 @@ while running:
     joueur.affiche_vie()
 
     #Apparition du boss
-    if joueur._score == 20:
+    if joueur._score == 200:
         liste_ennemi._liste_ennemi = []
         if not boss_kill:
             boss.afficher()
