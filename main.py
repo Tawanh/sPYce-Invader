@@ -72,6 +72,7 @@ while running:
                     boss_kill = True
             elif e.is_collide(largeur, liste_ennemi.getlistennemi()):
                 print("Ennemi mort")
+		joueur.ajout_score()
                 projectiles_joueur.pop(i)
             elif e.is_collide(largeur, liste_tout_shield, True, "haut"):
                 projectiles_joueur.pop(i)
